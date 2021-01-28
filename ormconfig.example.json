@@ -1,0 +1,26 @@
+[
+  {
+    "name": "default",
+    "type": "postgres",
+    "host": "",
+    "port": 0,
+    "username": "",
+    "password": "",
+    "database": "",
+    "migrations": [],
+    "entities": [],
+    "cli": {
+      "migrationsDir": ""
+    }
+  },
+  {
+    "name": "tests",
+    "type": "sqlite",
+    "database": "",
+    "migrations": [],
+    "entities": [],
+    "cli": {
+      "migrationsDir": ""
+    }
+  }
+]
