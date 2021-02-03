@@ -5,3 +5,4 @@ tests/db_tests.sqlite
 ormconfig.json
 yarn-error.log
 yarn.lock
+**.gitkeep

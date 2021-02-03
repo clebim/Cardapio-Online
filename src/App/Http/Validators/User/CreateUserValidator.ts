@@ -29,7 +29,11 @@ export const userSchemaValidator = yup.object().shape({
     .string()
     .required(errorMessages.required)
     .typeError(errorMessages.type),
-
+  phone: yup
+    .string()
+    .required(errorMessages.required)
+    .length(14, errorMessages.length)
+    .typeError(errorMessages.type),
   neighborhood: yup
     .string()
     .required(errorMessages.required)

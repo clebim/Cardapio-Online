@@ -6,9 +6,11 @@ import {
   UpdateDateColumn,
   BeforeInsert,
   BeforeUpdate,
+  OneToOne,
 } from 'typeorm';
 
 import bcrypt from 'bcryptjs';
+import RefreshToken from './RefreshToken';
 
 @Entity('users')
 export default class User {
@@ -23,6 +25,9 @@ export default class User {
 
   @Column('varchar', { select: false })
   password: string;
+
+  @Column('varchar')
+  phone: string;
 
   @Column('varchar')
   city: string;
@@ -44,6 +49,9 @@ export default class User {
 
   @UpdateDateColumn({ select: false })
   updated_at: Date;
+
+  @OneToOne(() => RefreshToken, refresh_token => refresh_token.user)
+  refresh_token: RefreshToken;
 
   @BeforeInsert()
   @BeforeUpdate()

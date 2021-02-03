@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "menu_online_backend",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -9,7 +9,8 @@
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "pretest": "NODE_ENV=test ts-node-dev ./node_modules/typeorm/cli.js -c tests migration:run",
     "test": "NODE_ENV=test jest --detectOpenHandles",
-    "posttest": "NODE_ENV=test ts-node-dev ./node_modules/typeorm/cli.js -c tests schema:drop"
+    "posttest": "NODE_ENV=test ts-node-dev ./node_modules/typeorm/cli.js -c tests schema:drop",
+    "drop:db_test": "ts-node-dev ./node_modules/typeorm/cli.js -c tests schema:drop"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -37,10 +38,14 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "date-fns": "^2.16.1",
+    "date-fns-tz": "^1.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.4.0",
     "typeorm": "^0.2.30",
     "yup": "^0.32.8"
   }

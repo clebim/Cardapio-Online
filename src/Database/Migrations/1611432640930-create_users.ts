@@ -31,6 +31,12 @@ export default class createUsers1611432640930 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'phone',
+            type: 'char',
+            isNullable: false,
+            length: '14',
+          },
+          {
             name: 'city',
             type: 'varchar',
             isNullable: false,
@@ -55,6 +61,11 @@ export default class createUsers1611432640930 implements MigrationInterface {
             type: 'char',
             length: '9',
             isNullable: false,
+          },
+          {
+            name: 'email_verified_at',
+            type: 'timestamp',
+            isNullable: true,
           },
           {
             name: 'created_at',

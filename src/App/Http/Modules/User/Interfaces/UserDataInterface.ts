@@ -3,6 +3,7 @@ export default interface UserData {
   email: string;
   password: string;
   confirmation_password?: string;
+  phone: string;
   city: string;
   neighborhood: string;
   street: string;

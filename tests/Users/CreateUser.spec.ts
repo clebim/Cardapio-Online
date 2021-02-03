@@ -1,17 +1,19 @@
 import request from 'supertest';
 import app from '../../src/app';
 
-describe('testando', () => {
+describe('CreateUser', () => {
+  // await loading environment variables
   beforeEach(async () => {
-    await new Promise<void>(resolve => setTimeout(() => resolve(), 200)); // avoid jest open handle error
+    await new Promise<void>(resolve => setTimeout(() => resolve(), 100)); // avoid jest open handle error
   });
 
   it('should be able to create a new user', async () => {
     const response = await request(app).post('/register').send({
       restaurant_name: 'Restaurante do Crebim',
-      email: 'crebim@gmail.com',
+      email: 'crebimTeste@gmail.com',
       password: '123456',
       confirmation_password: '123456',
+      phone: '(34) 998711646',
       city: 'Uberlandia',
       neighborhood: 'Cidade Jardim',
       street: 'Rua das rosas',
@@ -26,9 +28,10 @@ describe('testando', () => {
   it('should not be able to create a new user with same email from another', async () => {
     const response = await request(app).post('/register').send({
       restaurant_name: 'Restaurante do Crebim',
-      email: 'crebim@gmail.com',
+      email: 'crebimTeste@gmail.com',
       password: '123456',
       confirmation_password: '123456',
+      phone: '(34) 998711646',
       city: 'Uberlandia',
       neighborhood: 'Cidade Jardim',
       street: 'Rua das rosas',
@@ -46,6 +49,7 @@ describe('testando', () => {
       email: 'crebim@gmail.com',
       password: '123456',
       confirmation_password: '000000',
+      phone: '(34) 998711646',
       city: 'Uberlandia',
       neighborhood: 'Cidade Jardim',
       street: 'Rua das rosas',
@@ -58,6 +62,6 @@ describe('testando', () => {
   });
 
   afterAll(async () => {
-    await new Promise<void>(resolve => setTimeout(() => resolve(), 200)); // avoid jest open handle error
+    await new Promise<void>(resolve => setTimeout(() => resolve(), 100)); // avoid jest open handle error
   });
 });
