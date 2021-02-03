@@ -15,8 +15,12 @@
   },
   {
     "name": "tests",
-    "type": "sqlite",
-    "database": "",
+    "type": "postgres",
+    "host": "",
+    "port": 5432,
+    "username": "",
+    "password": "",
+    "database": "db_test",
     "migrations": [],
     "entities": [],
     "cli": {
