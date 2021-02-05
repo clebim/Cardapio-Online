@@ -9,12 +9,12 @@ describe('RefreshToken', () => {
   });
 
   it('shoulb be able to get a new access_token with refresh_token', async () => {
-    const response = await request(app).post('/login').send({
+    const response = await request(app).post('/auth/login').send({
       email: 'crebimTeste@gmail.com',
       password: '123456',
     });
     const responseRefreshToken = await request(app)
-      .post('/refresh_token')
+      .post('/auth/refresh_token')
       .send({
         refresh_token: response.body.tokens.refresh_token,
       });
@@ -26,7 +26,7 @@ describe('RefreshToken', () => {
 
   it('should not able to create a new access_token with invalid refresh_token', async () => {
     const responseRefreshToken = await request(app)
-      .post('/refresh_token')
+      .post('/auth/refresh_token')
       .send({
         refresh_token: 'asdasdasdasdasdgdfgdfgas-1-adasdasdasdasdasdasdgfgdf',
       });

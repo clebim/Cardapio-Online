@@ -8,7 +8,7 @@ describe('CreateSession', () => {
   });
 
   it('should be able to create a new session', async () => {
-    const response = await request(app).post('/login').send({
+    const response = await request(app).post('/auth/login').send({
       email: 'crebimTeste@gmail.com',
       password: '123456',
     });
@@ -18,7 +18,7 @@ describe('CreateSession', () => {
   });
 
   it('should not be able to create a new session with a user that does not exist', async () => {
-    const response = await request(app).post('/login').send({
+    const response = await request(app).post('/auth/login').send({
       email: 'crebimTesteErrado@gmail.com',
       password: '123456',
     });
@@ -28,7 +28,7 @@ describe('CreateSession', () => {
   });
 
   it('should not be able to create a new session with incorrect password', async () => {
-    const response = await request(app).post('/login').send({
+    const response = await request(app).post('/auth/login').send({
       email: 'crebimTeste@gmail.com',
       password: '000000',
     });

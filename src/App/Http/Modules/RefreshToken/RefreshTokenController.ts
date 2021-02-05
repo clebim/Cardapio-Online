@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import jwt from 'jsonwebtoken';
 import authConfig from '../../../../Config/AuthConfig';
-import RefreshTokenService from '../../../../Shared/RefreshToken/RefreshTokenService';
+import RefreshTokenService from '../../../../Shared/Services/RefreshToken/RefreshTokenService';
 
 export default {
   async create(request: Request, response: Response): Promise<Response> {

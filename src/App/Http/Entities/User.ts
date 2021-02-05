@@ -11,6 +11,7 @@ import {
 
 import bcrypt from 'bcryptjs';
 import RefreshToken from './RefreshToken';
+import HashForgotPassword from './HashForgotPassword';
 
 @Entity('users')
 export default class User {
@@ -52,6 +53,9 @@ export default class User {
 
   @OneToOne(() => RefreshToken, refresh_token => refresh_token.user)
   refresh_token: RefreshToken;
+
+  @OneToOne(() => HashForgotPassword, hash => hash.user)
+  hash: HashForgotPassword;
 
   @BeforeInsert()
   @BeforeUpdate()

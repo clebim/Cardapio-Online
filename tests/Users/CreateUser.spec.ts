@@ -26,7 +26,7 @@ describe('CreateUser', () => {
   });
 
   it('should not be able to create a new user with same email from another', async () => {
-    const response = await request(app).post('/register').send({
+    const response = await request(app).post('/auth/register').send({
       restaurant_name: 'Restaurante do Crebim',
       email: 'crebimTeste@gmail.com',
       password: '123456',
@@ -44,7 +44,7 @@ describe('CreateUser', () => {
   });
 
   it('should not be able to create a new user with password and differente condirmation password ', async () => {
-    const response = await request(app).post('/register').send({
+    const response = await request(app).post('/auth/register').send({
       restaurant_name: 'Restaurante do Crebim',
       email: 'crebim@gmail.com',
       password: '123456',

@@ -1,6 +1,6 @@
 import { getConnection, Repository } from 'typeorm';
-import RefreshToken from '../../App/Http/Entities/RefreshToken';
-import connection from '../../Config/ConnectionDataBaseConfig';
+import RefreshToken from '../../../App/Http/Entities/RefreshToken';
+import connection from '../../../Config/ConnectionDataBaseConfig';
 import RefreshTokenRepositoryInterface from './Interfaces/RefreshTokenRepositoryInterface';
 import TokenDataInterface from './Interfaces/TokenDataInterface';
 
