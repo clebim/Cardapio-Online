@@ -6,7 +6,7 @@ import { sessionSchemaValidator } from '../../Validators/Session/CreateSessionVa
 import SessionDataInterface from './Interfaces/SessionDataInterface';
 import SessionRepositoryInterface from './Interfaces/SessionRepositoryInterface';
 import SessionServiceResponseInterface from './Interfaces/SessionServiceResponseInterface';
-import RefreshTokenService from '../../../../Shared/RefreshToken/RefreshTokenService';
+import RefreshTokenService from '../../../../Shared/Services/RefreshToken/RefreshTokenService';
 
 @injectable()
 export default class SessionService {
