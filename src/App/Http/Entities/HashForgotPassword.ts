@@ -33,6 +33,6 @@ export default class HashForgotPassword {
   updated_at: Date;
 
   @OneToOne(() => User, user => user.hash)
-  @JoinColumn({ name: 'users' })
+  @JoinColumn({ name: 'user_id' })
   user: User;
 }

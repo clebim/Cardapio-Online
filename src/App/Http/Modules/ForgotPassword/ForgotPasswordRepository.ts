@@ -33,6 +33,8 @@ export default class ForgotPasswordRepository
       expires_at: data.expires_at,
     });
 
+    await this.ormRepository.save(newHash);
+
     return newHash;
   }
 
@@ -42,6 +44,7 @@ export default class ForgotPasswordRepository
     const hashExists = await this.ormRepository.findOne({
       where: {
         hash,
+        revoged: false,
       },
     });
 
