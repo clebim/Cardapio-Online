@@ -9,6 +9,7 @@
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "pretest": "NODE_ENV=test ts-node-dev ./node_modules/typeorm/cli.js -c tests migration:run",
     "test": "NODE_ENV=test jest --detectOpenHandles",
+    "queue": "ts-node-dev --transpile-only --ignore-watch node_modules src/Queue.ts",
     "posttest": "NODE_ENV=test ts-node-dev ./node_modules/typeorm/cli.js -c tests schema:drop",
     "drop:db_test": "ts-node-dev ./node_modules/typeorm/cli.js -c tests schema:drop"
   },
@@ -38,6 +39,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bee-queue": "^1.3.1",
     "cors": "^2.8.5",
     "date-fns": "^2.16.1",
     "date-fns-tz": "^1.1.1",

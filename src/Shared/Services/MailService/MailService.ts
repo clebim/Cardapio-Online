@@ -18,6 +18,10 @@ export default class MailService implements MailServiceInterface {
     this.client = transporter;
   }
 
+  public teste(): string {
+    return 'chamou';
+  }
+
   public async sendMail(data: SendMailInterface): Promise<void> {
     await this.client.sendMail({
       from: {

@@ -1,18 +1,15 @@
 import { inject, injectable } from 'tsyringe';
 import crypto from 'crypto';
-import path from 'path';
 import { addMinutes } from 'date-fns';
 import ForgotPasswordRepositoryInterface from './Interfaces/ForgotPasswordRepositoryInterface';
 import ForgotPasswordServiceResponseInterface from './Interfaces/ForgotPasswordServiceResponseInterface';
-import MailServiceInterface from '../../../../Shared/Services/MailService/Interfaces/MailServiceInterface';
+import QueueService from '../../../../Shared/Services/QueueService/QueueService';
 
 @injectable()
 export default class ForgotPasswordService {
   constructor(
     @inject('ForgotPasswordRepository')
     private forgotPasswordRepository: ForgotPasswordRepositoryInterface,
-    @inject('MailService')
-    private mailService: MailServiceInterface,
   ) {}
 
   async getHashForgotPassword(
@@ -38,29 +35,13 @@ export default class ForgotPasswordService {
 
     const expires_at = addMinutes(Date.now(), 30);
 
-    const forgotPasswordTemplate = path.resolve(
-      __dirname,
-      '..',
-      '..',
-      'Views',
-      'ForgotPassword.hbs',
-    );
+    const variables = {
+      name: userExists.restaurant_name,
+      email: userExists.email,
+      hash,
+    };
 
-    await this.mailService.sendMail({
-      to: {
-        name: userExists.restaurant_name,
-        email: userExists.email,
-      },
-      subject: '[MenuOnline] Recuperação de senha',
-
-      templateData: {
-        file: forgotPasswordTemplate,
-        variables: {
-          name: userExists.restaurant_name,
-          hash,
-        },
-      },
-    });
+    await QueueService.add('ForgotPasswordMail', { variables });
 
     await this.forgotPasswordRepository.createHash({
       hash,
