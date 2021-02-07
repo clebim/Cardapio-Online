@@ -6,11 +6,11 @@
   "scripts": {
     "build": "tsc",
     "dev:server": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
-    "queue": "ts-node-dev --transpile-only --ignore-watch node_modules src/Queue.ts",
+    "queue": "ts-node-dev --transpile-only --ignore-watch node_modules src/queue.ts",
     "drop:db_test": "ts-node-dev ./node_modules/typeorm/cli.js -c tests schema:drop",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "pretest": "NODE_ENV=test ts-node-dev ./node_modules/typeorm/cli.js -c tests migration:run",
-    "test": "NODE_ENV=test jest --detectOpenHandles",
+    "test": "NODE_ENV=test jest --detectOpenHandles --forceExit",
     "posttest": "NODE_ENV=test ts-node-dev ./node_modules/typeorm/cli.js -c tests schema:drop"
   },
   "devDependencies": {
