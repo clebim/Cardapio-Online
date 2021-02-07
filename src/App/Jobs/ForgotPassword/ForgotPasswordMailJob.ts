@@ -3,8 +3,8 @@
 import { Job } from 'bee-queue';
 import path from 'path';
 import { container } from 'tsyringe';
-import MailService from '../../../../Shared/Services/MailService/MailService';
-import MailServiceInterface from '../../../../Shared/Services/MailService/Interfaces/MailServiceInterface';
+import MailService from '../../../Shared/Services/MailService/MailService';
+import MailServiceInterface from '../../../Shared/Services/MailService/Interfaces/MailServiceInterface';
 import { DataHandleInterface } from './Interfaces/ForgotPasswordDataInterface';
 import ForgotPasswordMailJobInterface from './Interfaces/ForgotPasswordMailJobInterface';
 
@@ -22,6 +22,7 @@ class ForgotPasswordMailJob implements ForgotPasswordMailJobInterface {
       __dirname,
       '..',
       '..',
+      'Http',
       'Views',
       'ForgotPassword.hbs',
     );

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import ForgotPasswordService from './ForgotPasswordService';
+import ResetPasswordDataInterface from './Interfaces/ResetPasswordDataInterface';
 
 export default {
   async getVerificationCode(
@@ -35,7 +36,18 @@ export default {
     return response.status(200).json(responseService);
   },
 
-  async resetPassword(): Promise<never> {
-    throw new Error('method not inmplemented');
+  async resetPassword(request: Request, response: Response): Promise<Response> {
+    const forgotPasswordService = container.resolve<ForgotPasswordService>(
+      ForgotPasswordService,
+    );
+
+    const responseService = await forgotPasswordService.resetPassword(
+      request.body as ResetPasswordDataInterface,
+    );
+
+    if (!responseService.success) {
+      return response.status(400).json(responseService);
+    }
+    return response.status(200).json(responseService);
   },
 };

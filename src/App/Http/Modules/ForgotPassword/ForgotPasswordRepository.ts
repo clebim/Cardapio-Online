@@ -18,6 +18,30 @@ export default class ForgotPasswordRepository
     this.ormUserRepository = getConnection(connection).getRepository(User);
   }
 
+  async resetPassword(user: User, password: string): Promise<boolean> {
+    try {
+      user.password = password;
+
+      await this.ormUserRepository.update(user.id, user);
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async getUserByHash(hash: string): Promise<User> {
+    const search = await this.ormRepository
+      .createQueryBuilder('hash_forgot_password')
+      .innerJoin('hash_forgot_password.user', 'user')
+      .where('hash_forgot_password.hash = :hash', { hash })
+      .select(['hash_forgot_password.id', 'user', 'user.password'])
+      .getOne();
+
+    const user = search?.user as User;
+    return user;
+  }
+
   async findUser(email: string): Promise<User | undefined> {
     const user = await this.ormUserRepository.findOne({
       where: { email },

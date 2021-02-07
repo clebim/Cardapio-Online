@@ -4,7 +4,7 @@
 import Bee from 'bee-queue';
 import redisConfig from '../../../Config/Redis';
 import JobInterface from './Interfaces/JobInterface';
-import Jobs from '../../../App/Http/Jobs';
+import Jobs from '../../../App/Jobs';
 
 class QueueService {
   jobs: any = [];
@@ -35,7 +35,7 @@ class QueueService {
   }
 
   processQueue(): void {
-    this.jobs.forEach((job: any) => {
+    this.jobs.forEach((job: JobInterface) => {
       const { bee, handle } = this.queues[job.key];
 
       bee.on('failed', this.handleFailure).process(handle);

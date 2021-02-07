@@ -8,7 +8,7 @@ describe('CreateUser', () => {
   });
 
   it('should be able to create a new user', async () => {
-    const response = await request(app).post('/register').send({
+    const response = await request(app).post('/auth/register').send({
       restaurant_name: 'Restaurante do Crebim',
       email: 'crebimTeste@gmail.com',
       password: '123456',
