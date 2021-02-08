@@ -13,8 +13,8 @@
 
 This api provides a online menu for any bar, restaurant.
 
-This project contains: login, register, forgot/reset password, sending emails in the background job,
-image uploads, and makes use to injection of dependencies.
+This project contains: sending emails, Background jobs, auth JWT
+image uploads, injection of dependencies.
 
 ## 🚀 Technologies
 
