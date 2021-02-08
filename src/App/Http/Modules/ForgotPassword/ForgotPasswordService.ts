@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import crypto from 'crypto';
 import { addMinutes, differenceInHours } from 'date-fns';
 import bcrypt from 'bcryptjs';
+import ForgotPasswordMailJob from '../../../Jobs/ForgotPassword/ForgotPasswordMailJob';
 import { ResetPasswordValidator } from '../../Validators/User/ResetPasswordValidator';
 import ForgotPasswordRepositoryInterface from './Interfaces/ForgotPasswordRepositoryInterface';
 import ForgotPasswordServiceResponseInterface from './Interfaces/ForgotPasswordServiceResponseInterface';
@@ -45,7 +46,7 @@ export default class ForgotPasswordService {
       hash,
     };
 
-    QueueService.add('ForgotPasswordMail', { variables });
+    QueueService.add(ForgotPasswordMailJob.key, { variables });
 
     await this.forgotPasswordRepository.createHash({
       hash,
