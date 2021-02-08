@@ -1,5 +1,5 @@
 <h3 align="center">
-  Express Application for GoBarber project
+  Express Application for Cardapio-Online project
 </h3>
 
 <p align="center">
