@@ -73,8 +73,12 @@ $ yarn typeorm migration:run
 # run command `test` to verify that everything is working correctly
 $ yarn test
 
+#run background jobs
+$ yarn queue
+
 # To finish, run the api service
 $ yarn dev:server
+
 
 # Well done, project is started!
 ```
