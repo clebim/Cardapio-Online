@@ -59,9 +59,13 @@ $ yarn
 # Create the instance of redis
 
 # Make a copy of '.env.example' to '.env'
-# and set with YOUR environment variables.
+# and set with YOUR environment variables in .env and .env.test
+# Do not change the NODE_ENV variable in .env.test
 # The aws variables do not need to be filled for dev environment
 $ cp .env.example .env
+
+# configure ormconfig.json with your settings following ormconfig.exemple.json
+$ cp ormconfig.example.json ormconfig.json
 
 # Once the services are running, run the migrations
 $ yarn typeorm migration:run
@@ -80,3 +84,6 @@ $ yarn dev:server
  - register
  - middleware auth JWT
  - refresh token JWT
+ - forgot/reset password
+ - sending emails
+ - background jobs
