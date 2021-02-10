@@ -1,11 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class createForgotPasswordTable1612486272410
-  implements MigrationInterface {
+export class createMenuItemsTable1612919681667 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'hash_forgot_password',
+        name: 'menu_items',
         columns: [
           {
             name: 'id',
@@ -16,26 +15,36 @@ export class createForgotPasswordTable1612486272410
             generationStrategy: 'increment',
           },
           {
-            name: 'hash',
-            type: 'char',
-            isNullable: false,
-            length: '6',
-          },
-          {
-            name: 'user_id',
+            name: 'menu_section_id',
             type: 'bigint',
             unsigned: true,
             isNullable: false,
           },
           {
-            name: 'expires_at',
-            type: 'timestamp',
+            name: 'item_name',
+            type: 'varchar',
             isNullable: false,
           },
           {
-            name: 'revoged',
-            type: 'boolean',
+            name: 'price',
+            type: 'decimal',
+            precision: 5,
+            scale: 2,
             isNullable: false,
+          },
+          {
+            name: 'description',
+            type: 'text',
+            isNullable: true,
+          },
+          {
+            name: 'observation',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'sold_off',
+            type: 'boolean',
             default: false,
           },
           {
@@ -51,9 +60,9 @@ export class createForgotPasswordTable1612486272410
         ],
         foreignKeys: [
           {
-            name: 'user',
-            columnNames: ['user_id'],
-            referencedTableName: 'users',
+            name: 'menu_section',
+            columnNames: ['menu_section_id'],
+            referencedTableName: 'menu_sections',
             referencedColumnNames: ['id'],
           },
         ],
@@ -62,6 +71,6 @@ export class createForgotPasswordTable1612486272410
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('hash_forgot_password');
+    await queryRunner.dropTable('menu_items');
   }
 }

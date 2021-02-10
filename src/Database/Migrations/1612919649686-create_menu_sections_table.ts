@@ -1,11 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class createForgotPasswordTable1612486272410
-  implements MigrationInterface {
+export class createMenuSectionTable1612919649686 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'hash_forgot_password',
+        name: 'menu_sections',
         columns: [
           {
             name: 'id',
@@ -16,24 +15,24 @@ export class createForgotPasswordTable1612486272410
             generationStrategy: 'increment',
           },
           {
-            name: 'hash',
-            type: 'char',
-            isNullable: false,
-            length: '6',
-          },
-          {
             name: 'user_id',
             type: 'bigint',
+            isNullable: false,
+            unsigned: true,
+          },
+          {
+            name: 'section_type_id',
+            type: 'int',
             unsigned: true,
             isNullable: false,
           },
           {
-            name: 'expires_at',
-            type: 'timestamp',
+            name: 'section_name',
+            type: 'varchar',
             isNullable: false,
           },
           {
-            name: 'revoged',
+            name: 'is_active',
             type: 'boolean',
             isNullable: false,
             default: false,
@@ -56,12 +55,18 @@ export class createForgotPasswordTable1612486272410
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
           },
+          {
+            name: 'section_type',
+            columnNames: ['section_type_id'],
+            referencedTableName: 'section_types',
+            referencedColumnNames: ['id'],
+          },
         ],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('hash_forgot_password');
+    await queryRunner.dropTable('menu_sections');
   }
 }

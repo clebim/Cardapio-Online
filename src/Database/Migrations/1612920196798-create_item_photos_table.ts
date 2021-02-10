@@ -1,11 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class createForgotPasswordTable1612486272410
-  implements MigrationInterface {
+export class createItemPhotosTable1612920196798 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'hash_forgot_password',
+        name: 'item_photos',
         columns: [
           {
             name: 'id',
@@ -16,27 +15,20 @@ export class createForgotPasswordTable1612486272410
             generationStrategy: 'increment',
           },
           {
-            name: 'hash',
-            type: 'char',
+            name: 'real_name',
+            type: 'varchar',
             isNullable: false,
-            length: '6',
           },
           {
-            name: 'user_id',
+            name: 'path',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'menu_item_id',
             type: 'bigint',
             unsigned: true,
             isNullable: false,
-          },
-          {
-            name: 'expires_at',
-            type: 'timestamp',
-            isNullable: false,
-          },
-          {
-            name: 'revoged',
-            type: 'boolean',
-            isNullable: false,
-            default: false,
           },
           {
             name: 'created_at',
@@ -51,9 +43,9 @@ export class createForgotPasswordTable1612486272410
         ],
         foreignKeys: [
           {
-            name: 'user',
-            columnNames: ['user_id'],
-            referencedTableName: 'users',
+            name: 'menu_item',
+            columnNames: ['menu_item_id'],
+            referencedTableName: 'menu_items',
             referencedColumnNames: ['id'],
           },
         ],
@@ -62,6 +54,6 @@ export class createForgotPasswordTable1612486272410
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('hash_forgot_password');
+    await queryRunner.dropTable('item_photos');
   }
 }

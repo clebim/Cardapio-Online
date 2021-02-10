@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class createForgotPasswordTable1612486272410
+export class createProfilePhotoTable1612919615675
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'hash_forgot_password',
+        name: 'profile_photos',
         columns: [
           {
             name: 'id',
@@ -16,27 +16,20 @@ export class createForgotPasswordTable1612486272410
             generationStrategy: 'increment',
           },
           {
-            name: 'hash',
-            type: 'char',
+            name: 'real_name',
+            type: 'varchar',
             isNullable: false,
-            length: '6',
+          },
+          {
+            name: 'path',
+            type: 'varchar',
+            isNullable: false,
           },
           {
             name: 'user_id',
             type: 'bigint',
             unsigned: true,
             isNullable: false,
-          },
-          {
-            name: 'expires_at',
-            type: 'timestamp',
-            isNullable: false,
-          },
-          {
-            name: 'revoged',
-            type: 'boolean',
-            isNullable: false,
-            default: false,
           },
           {
             name: 'created_at',
@@ -62,6 +55,6 @@ export class createForgotPasswordTable1612486272410
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('hash_forgot_password');
+    await queryRunner.dropTable('profile_photos');
   }
 }
