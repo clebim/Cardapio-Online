@@ -6,7 +6,9 @@ import {
   UpdateDateColumn,
   JoinColumn,
   ManyToOne,
+  OneToOne,
 } from 'typeorm';
+import ItemPhoto from './ItemPhoto';
 import MenuSection from './MenuSection';
 
 @Entity('menu_sections')
@@ -38,4 +40,7 @@ export default class MenuItem {
   @ManyToOne(() => MenuSection, section => section.item)
   @JoinColumn({ name: 'menu_section_id' })
   section: MenuSection;
+
+  @OneToOne(() => ItemPhoto, photo => photo.item)
+  photo: ItemPhoto;
 }
