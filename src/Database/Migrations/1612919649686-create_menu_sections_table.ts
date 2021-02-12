@@ -29,7 +29,7 @@ export class createMenuSectionTable1612919649686 implements MigrationInterface {
             name: 'is_active',
             type: 'boolean',
             isNullable: false,
-            default: false,
+            default: true,
           },
           {
             name: 'created_at',
