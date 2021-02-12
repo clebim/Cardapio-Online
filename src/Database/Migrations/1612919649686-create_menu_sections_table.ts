@@ -21,12 +21,6 @@ export class createMenuSectionTable1612919649686 implements MigrationInterface {
             unsigned: true,
           },
           {
-            name: 'section_type_id',
-            type: 'int',
-            unsigned: true,
-            isNullable: false,
-          },
-          {
             name: 'section_name',
             type: 'varchar',
             isNullable: false,
@@ -53,12 +47,6 @@ export class createMenuSectionTable1612919649686 implements MigrationInterface {
             name: 'user',
             columnNames: ['user_id'],
             referencedTableName: 'users',
-            referencedColumnNames: ['id'],
-          },
-          {
-            name: 'section_type',
-            columnNames: ['section_type_id'],
-            referencedTableName: 'section_types',
             referencedColumnNames: ['id'],
           },
         ],

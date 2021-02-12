@@ -7,11 +7,14 @@ import {
   BeforeInsert,
   BeforeUpdate,
   OneToOne,
+  OneToMany,
 } from 'typeorm';
 
 import bcrypt from 'bcryptjs';
 import RefreshToken from './RefreshToken';
 import HashForgotPassword from './HashForgotPassword';
+import MenuSection from './MenuSection';
+import ProfilePhoto from './ProfilePhoto';
 
 @Entity('users')
 export default class User {
@@ -56,6 +59,12 @@ export default class User {
 
   @OneToOne(() => HashForgotPassword, hash => hash.user)
   hash: HashForgotPassword;
+
+  @OneToMany(() => MenuSection, section => section.user)
+  section: MenuSection;
+
+  @OneToOne(() => ProfilePhoto, photo => photo.user)
+  photo: ProfilePhoto;
 
   @BeforeInsert()
   @BeforeUpdate()
