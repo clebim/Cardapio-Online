@@ -6,10 +6,11 @@ import {
   UpdateDateColumn,
   JoinColumn,
   OneToOne,
+  AfterLoad,
 } from 'typeorm';
 import User from './User';
 
-@Entity('menu_sections')
+@Entity('profile_photos')
 export default class ProfilePhoto {
   @PrimaryGeneratedColumn('increment')
   id: number;
@@ -32,4 +33,9 @@ export default class ProfilePhoto {
   @OneToOne(() => User, user => user.photo)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @AfterLoad()
+  setUrl(): void {
+    this.path = `${process.env.APP_URL}/files/${this.path}`;
+  }
 }

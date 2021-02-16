@@ -12,6 +12,13 @@ export default class UserRepository implements UserRepositoryInterface {
     this.ormRepository = getConnection(connection).getRepository(User);
   }
 
+  async findOneById(id: number): Promise<User> {
+    const user = await this.ormRepository.findOne({
+      where: { id },
+    });
+    return user as User;
+  }
+
   public async findOneByEmail(email: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne({
       where: { email },

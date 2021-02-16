@@ -5,4 +5,5 @@ export default interface SectionMenuRepositoryInterface {
   setActive(sectionId: number): Promise<boolean>;
   setNotActive(sectionId: number): Promise<boolean>;
   getUserSections(userId: number): Promise<MenuSection[]>;
+  deleteSection(sectionId: number): Promise<boolean>;
 }

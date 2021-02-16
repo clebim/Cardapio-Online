@@ -6,14 +6,14 @@ import AuthConfig from '../../../Config/AuthConfig';
 interface TokenPayload {
   iat: number;
   exp: number;
-  sub: string;
+  id: string;
 }
 
 export default function (
   request: Request,
   response: Response,
   next: NextFunction,
-): Response | NextFunction {
+): Response | void {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
@@ -28,11 +28,11 @@ export default function (
   try {
     const decoded = verify(token, AuthConfig.secret);
 
-    const { sub } = decoded as TokenPayload;
+    const { id } = decoded as TokenPayload;
 
-    request.userId = parseInt(sub);
+    request.userId = parseInt(id);
 
-    return next;
+    return next();
   } catch {
     return response.json({
       success: false,

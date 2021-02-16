@@ -1,4 +1,6 @@
 import { container } from 'tsyringe';
+import PhotoUserRepositoryInterface from '../../App/Http/Modules/PhotoUserProfile/Interfaces/PhotoUserRepositoryInterface';
+import PhotoUserRepository from '../../App/Http/Modules/PhotoUserProfile/PhotoUseRepository';
 import MailServiceInterface from '../Services/MailService/Interfaces/MailServiceInterface';
 import MailService from '../Services/MailService/MailService';
 import MailTemplateServiceInterface from '../Services/MailTemplate/Interfaces/MailTemplateServiceInterface';
@@ -38,6 +40,11 @@ container.registerSingleton<ForgotPasswordRepositoryInterface>(
 container.registerSingleton<MailTemplateServiceInterface>(
   'MailTemplateService',
   MailTemplateService,
+);
+
+container.registerSingleton<PhotoUserRepositoryInterface>(
+  'PhotoUserRepository',
+  PhotoUserRepository,
 );
 
 container.registerSingleton<MailServiceInterface>('MailService', MailService);

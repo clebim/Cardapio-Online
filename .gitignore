@@ -1,9 +1,9 @@
 node_modules
-uploads/*
-!uploads/.gitkeep
+Uploads/*
+!Uploads/.gitkeep
 .env
 tests/db_tests.sqlite
 ormconfig.json
 yarn-error.log
 yarn.lock
-**.gitkeep
+

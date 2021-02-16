@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import MenuItem from './MenuItem';
 
-@Entity('menu_sections')
+@Entity('item_photos')
 export default class ItemPhoto {
   @PrimaryGeneratedColumn('increment')
   id: number;

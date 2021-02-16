@@ -11,7 +11,7 @@ import {
 import ItemPhoto from './ItemPhoto';
 import MenuSection from './MenuSection';
 
-@Entity('menu_sections')
+@Entity('menu_items')
 export default class MenuItem {
   @PrimaryGeneratedColumn('increment')
   id: number;
