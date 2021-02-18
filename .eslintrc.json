@@ -25,8 +25,10 @@
     "class-methods-use-this": "off",
     "no-param-reassign": "off",
     "func-names": "off",
+    "radix": "off",
     "camelcase": "off",
     "no-useless-constructor": "off",
+    "eqeqeq": "off",
     "no-unused-vars": "off",
     "import/extensions": [
       "error",

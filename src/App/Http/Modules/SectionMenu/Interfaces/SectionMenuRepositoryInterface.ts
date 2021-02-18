@@ -2,8 +2,8 @@ import MenuSection from 'App/Http/Entities/MenuSection';
 
 export default interface SectionMenuRepositoryInterface {
   createSection(userId: number, sectionName: string): Promise<MenuSection>;
-  setActive(sectionId: number): Promise<boolean>;
-  setNotActive(sectionId: number): Promise<boolean>;
+  setIsActive(section: MenuSection): Promise<void>;
   getUserSections(userId: number): Promise<MenuSection[]>;
-  deleteSection(sectionId: number): Promise<boolean>;
+  getSectionById(sectionId: number): Promise<MenuSection | undefined>;
+  deleteSection(sectionId: number): Promise<void>;
 }

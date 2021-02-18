@@ -1,4 +1,6 @@
 import { container } from 'tsyringe';
+import SectionMenuRepositoryInterface from '../../App/Http/Modules/SectionMenu/Interfaces/SectionMenuRepositoryInterface';
+import SectionMenuRepository from '../../App/Http/Modules/SectionMenu/SectionMenuRepository';
 import PhotoUserRepositoryInterface from '../../App/Http/Modules/PhotoUserProfile/Interfaces/PhotoUserRepositoryInterface';
 import PhotoUserRepository from '../../App/Http/Modules/PhotoUserProfile/PhotoUseRepository';
 import MailServiceInterface from '../Services/MailService/Interfaces/MailServiceInterface';
@@ -45,6 +47,11 @@ container.registerSingleton<MailTemplateServiceInterface>(
 container.registerSingleton<PhotoUserRepositoryInterface>(
   'PhotoUserRepository',
   PhotoUserRepository,
+);
+
+container.registerSingleton<SectionMenuRepositoryInterface>(
+  'SectionMenuRepository',
+  SectionMenuRepository,
 );
 
 container.registerSingleton<MailServiceInterface>('MailService', MailService);

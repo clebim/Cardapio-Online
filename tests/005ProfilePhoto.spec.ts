@@ -1,10 +1,10 @@
 import request from 'supertest';
 import { resolve as resolvePath } from 'path';
-import app from '../../src/app';
+import app from '../src/app';
 
 let access_token = '';
 
-describe('Forgot Password', () => {
+describe('Profile Photo', () => {
   beforeEach(async () => {
     await new Promise<void>(resolve => setTimeout(() => resolve(), 100)); // avoid jest open handle error
 

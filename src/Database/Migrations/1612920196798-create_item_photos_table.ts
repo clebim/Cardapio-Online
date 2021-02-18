@@ -47,6 +47,7 @@ export class createItemPhotosTable1612920196798 implements MigrationInterface {
             columnNames: ['menu_item_id'],
             referencedTableName: 'menu_items',
             referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
           },
         ],
       }),

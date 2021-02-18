@@ -64,6 +64,7 @@ export class createMenuItemsTable1612919681667 implements MigrationInterface {
             columnNames: ['menu_section_id'],
             referencedTableName: 'menu_sections',
             referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
           },
         ],
       }),

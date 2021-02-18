@@ -4,6 +4,7 @@ import UserController from '../App/Http/Modules/User/UserController';
 import SessionController from '../App/Http/Modules/Session/SessionController';
 import RefreshTokenController from '../App/Http/Modules/RefreshToken/RefreshTokenController';
 import PhotoUserController from '../App/Http/Modules/PhotoUserProfile/PhotoUserController';
+import SectionMenuController from '../App/Http/Modules/SectionMenu/SectionMenuController';
 
 import AuthMiddleware from '../App/Http/Middlewares/auth';
 import ForgotPasswordController from '../App/Http/Modules/ForgotPassword/ForgotPasswordController';
@@ -30,7 +31,7 @@ routes.post(
 );
 routes.post('/auth/reset_password', ForgotPasswordController.resetPassword);
 
-// after the line all routes have authMiddleware
+// after this line all routes have authMiddleware
 routes.use(AuthMiddleware);
 
 routes.post(
@@ -38,5 +39,12 @@ routes.post(
   upload.single('image'),
   PhotoUserController.store,
 );
+
+routes.post('/menu_section/store', SectionMenuController.store);
+routes.post(
+  '/menu_section/set_active/:id',
+  SectionMenuController.changeIsActive,
+);
+routes.get('/menu_section/delete/:id', SectionMenuController.delete);
 
 export default routes;
