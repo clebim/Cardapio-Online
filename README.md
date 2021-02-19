@@ -91,3 +91,4 @@ $ yarn dev:server
  - forgot/reset password
  - sending emails
  - background jobs
+ - SectionMenu cruds
