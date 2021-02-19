@@ -1,8 +1,8 @@
 import { getConnection, Repository } from 'typeorm';
 import User from '../../Entities/User';
+import UserRepositoryInterface from './UserRepositoryInterface';
 
-import UserRepositoryInterface from './Interfaces/UserRepositoryInterface';
-import UserData from './Interfaces/UserDataInterface';
+import UserData from '../Interfaces/UserDataInterface';
 import connection from '../../../../Config/ConnectionDataBaseConfig';
 
 export default class UserRepository implements UserRepositoryInterface {
@@ -22,6 +22,7 @@ export default class UserRepository implements UserRepositoryInterface {
   public async findOneByEmail(email: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne({
       where: { email },
+      select: ['email', 'password', 'id', 'restaurant_name'],
     });
     return user;
   }
@@ -42,5 +43,17 @@ export default class UserRepository implements UserRepositoryInterface {
     await this.ormRepository.save(user);
 
     return user;
+  }
+
+  async resetPassword(user: User, password: string): Promise<boolean> {
+    try {
+      user.password = password;
+
+      await this.ormRepository.update(user.id, user);
+
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 }

@@ -1,33 +1,18 @@
 import { Repository, getConnection } from 'typeorm';
 import HashForgotPassword from '../../Entities/HashForgotPassword';
-import User from '../../Entities/User';
-import CreateHashInterface from './Interfaces/CreateHashInterface';
-import ForgotPasswordRepositoryInterface from './Interfaces/ForgotPasswordRepositoryInterface';
+import CreateHashInterface from '../Interfaces/CreateHashInterface';
+import ForgotPasswordRepositoryInterface from './ForgotPasswordRepositoryInterface';
 import connection from '../../../../Config/ConnectionDataBaseConfig';
+import User from '../../Entities/User';
 
 export default class ForgotPasswordRepository
   implements ForgotPasswordRepositoryInterface {
   private ormRepository: Repository<HashForgotPassword>;
 
-  private ormUserRepository: Repository<User>;
-
   constructor() {
     this.ormRepository = getConnection(connection).getRepository(
       HashForgotPassword,
     );
-    this.ormUserRepository = getConnection(connection).getRepository(User);
-  }
-
-  async resetPassword(user: User, password: string): Promise<boolean> {
-    try {
-      user.password = password;
-
-      await this.ormUserRepository.update(user.id, user);
-
-      return true;
-    } catch (error) {
-      return false;
-    }
   }
 
   async getUserByHash(hash: string): Promise<User> {
@@ -39,14 +24,6 @@ export default class ForgotPasswordRepository
       .getOne();
 
     const user = search?.user as User;
-    return user;
-  }
-
-  async findUser(email: string): Promise<User | undefined> {
-    const user = await this.ormUserRepository.findOne({
-      where: { email },
-    });
-
     return user;
   }
 

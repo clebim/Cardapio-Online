@@ -3,14 +3,14 @@ import { join } from 'path';
 import fs from 'fs';
 import Multer from '../../../../Config/Multer';
 import CreatePhotoResponse from './Interfaces/CreatePhotoResponse';
-import PhotoUserRepositoryInterface from './Interfaces/PhotoUserRepositoryInterface';
+import ProfilePhotoRepositoryInterface from '../../../Typeorm/Repositories/ProfilePhoto/ProfilePhotoRepositoryInterface';
 import RequestImageInterface from './Interfaces/RequestImageInterface';
 
 @injectable()
 export default class PhotoUserService {
   constructor(
-    @inject('PhotoUserRepository')
-    private ormRepository: PhotoUserRepositoryInterface,
+    @inject('ProfilePhoto')
+    private ormRepository: ProfilePhotoRepositoryInterface,
   ) {}
 
   public async executeCreateProfilePhoto(

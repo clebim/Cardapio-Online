@@ -1,11 +1,11 @@
 import { getConnection, Repository } from 'typeorm';
 import ProfilePhoto from '../../Entities/ProfilePhoto';
-import PhotoUserRepositoryInterface from './Interfaces/PhotoUserRepositoryInterface';
+import ProfilePhotoRepositoryInterface from './ProfilePhotoRepositoryInterface';
 import connection from '../../../../Config/ConnectionDataBaseConfig';
-import CreatePhotoInterface from './Interfaces/CreatePhotoInterface';
+import CreatePhotoInterface from '../Interfaces/CreatePhotoInterface';
 
 export default class PhotoUserRepository
-  implements PhotoUserRepositoryInterface {
+  implements ProfilePhotoRepositoryInterface {
   private ormRepository: Repository<ProfilePhoto>;
 
   constructor() {

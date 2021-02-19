@@ -1,5 +1,5 @@
-import ProfilePhoto from '../../../Entities/ProfilePhoto';
-import CreatePhotoInterface from './CreatePhotoInterface';
+import ProfilePhoto from '../../Entities/ProfilePhoto';
+import CreatePhotoInterface from '../Interfaces/CreatePhotoInterface';
 
 export default interface PhotoUserRepositoryInterface {
   createPhoto(data: CreatePhotoInterface): Promise<ProfilePhoto>;

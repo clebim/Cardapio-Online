@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import UserData from './Interfaces/UserDataInterface';
+import UserData from '../../../Typeorm/Repositories/Interfaces/UserDataInterface';
 import UserService from './UserService';
 
 export default {

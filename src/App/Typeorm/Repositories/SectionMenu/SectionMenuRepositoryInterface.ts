@@ -1,4 +1,4 @@
-import MenuSection from 'App/Http/Entities/MenuSection';
+import MenuSection from '../../Entities/MenuSection';
 
 export default interface SectionMenuRepositoryInterface {
   createSection(userId: number, sectionName: string): Promise<MenuSection>;

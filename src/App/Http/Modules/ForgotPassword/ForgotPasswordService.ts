@@ -4,17 +4,20 @@ import { addMinutes, differenceInHours } from 'date-fns';
 import bcrypt from 'bcryptjs';
 import ForgotPasswordMailJob from '../../../Jobs/ForgotPassword/ForgotPasswordMailJob';
 import { ResetPasswordValidator } from '../../Validators/User/ResetPasswordValidator';
-import ForgotPasswordRepositoryInterface from './Interfaces/ForgotPasswordRepositoryInterface';
+import ForgotPasswordRepositoryInterface from '../../../Typeorm/Repositories/ForgotPassword/ForgotPasswordRepositoryInterface';
+import UserRepositoryInterface from '../../../Typeorm/Repositories/User/UserRepositoryInterface';
 import ForgotPasswordServiceResponseInterface from './Interfaces/ForgotPasswordServiceResponseInterface';
 import QueueService from '../../../../Shared/Services/QueueService/QueueService';
 import ResetPasswordDataInterface from './Interfaces/ResetPasswordDataInterface';
-import User from '../../Entities/User';
+import User from '../../../Typeorm/Entities/User';
 
 @injectable()
 export default class ForgotPasswordService {
   constructor(
     @inject('ForgotPasswordRepository')
     private forgotPasswordRepository: ForgotPasswordRepositoryInterface,
+    @inject('UserRepository')
+    private userRepository: UserRepositoryInterface,
   ) {}
 
   async getHashForgotPassword(
@@ -27,7 +30,7 @@ export default class ForgotPasswordService {
       };
     }
 
-    const userExists = await this.forgotPasswordRepository.findUser(email);
+    const userExists = await this.userRepository.findOneByEmail(email);
 
     if (!userExists) {
       return {
@@ -127,7 +130,7 @@ export default class ForgotPasswordService {
       };
     }
 
-    const response = await this.forgotPasswordRepository.resetPassword(
+    const response = await this.userRepository.resetPassword(
       user as User,
       data.password,
     );

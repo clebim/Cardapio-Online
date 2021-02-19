@@ -1,6 +1,6 @@
 import { getConnection, Repository } from 'typeorm';
 import MenuSection from '../../Entities/MenuSection';
-import SectionMenuRepositoryInterface from './Interfaces/SectionMenuRepositoryInterface';
+import SectionMenuRepositoryInterface from './SectionMenuRepositoryInterface';
 import connection from '../../../../Config/ConnectionDataBaseConfig';
 
 export default class SectionMenuRepository

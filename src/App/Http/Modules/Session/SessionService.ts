@@ -4,15 +4,15 @@ import jwt from 'jsonwebtoken';
 import authConfig from '../../../../Config/AuthConfig';
 import { sessionSchemaValidator } from '../../Validators/Session/CreateSessionValidator';
 import SessionDataInterface from './Interfaces/SessionDataInterface';
-import SessionRepositoryInterface from './Interfaces/SessionRepositoryInterface';
 import SessionServiceResponseInterface from './Interfaces/SessionServiceResponseInterface';
 import RefreshTokenService from '../../../../Shared/Services/RefreshToken/RefreshTokenService';
+import UserRepositoryInterface from '../../../Typeorm/Repositories/User/UserRepositoryInterface';
 
 @injectable()
 export default class SessionService {
   constructor(
-    @inject('SessionRepository')
-    private sessionRepository: SessionRepositoryInterface,
+    @inject('UserRepository')
+    private userRepository: UserRepositoryInterface,
     @inject('RefreshTokenService')
     private refreshTokenService: RefreshTokenService,
   ) {}
@@ -38,7 +38,7 @@ export default class SessionService {
 
     const { email, password } = data;
 
-    const userExist = await this.sessionRepository.verifyUserExists(email);
+    const userExist = await this.userRepository.findOneByEmail(email);
 
     if (!userExist) {
       return {

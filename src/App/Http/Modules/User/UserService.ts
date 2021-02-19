@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe';
 import UserServiceResponse from './Interfaces/UserServiceResponse';
 import { userSchemaValidator } from '../../Validators/User/CreateUserValidator';
-import UserData from './Interfaces/UserDataInterface';
-import UserRepositoryInterface from './Interfaces/UserRepositoryInterface';
+import UserData from '../../../Typeorm/Repositories/Interfaces/UserDataInterface';
+import UserRepositoryInterface from '../../../Typeorm/Repositories/User/UserRepositoryInterface';
 
 @injectable()
 export default class UserService {
