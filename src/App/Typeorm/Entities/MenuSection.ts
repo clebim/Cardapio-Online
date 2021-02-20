@@ -36,5 +36,5 @@ export default class MenuSection {
   user: User;
 
   @OneToMany(() => MenuItem, item => item.section)
-  item: MenuItem;
+  items: MenuItem[];
 }

@@ -1,7 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 import { join } from 'path';
 import fs from 'fs';
-import Multer from '../../../../Config/Multer';
+import { profilePhotoMulterConfig } from '../../../../Config/Multer';
 import CreatePhotoResponse from './Interfaces/CreatePhotoResponse';
 import ProfilePhotoRepositoryInterface from '../../../Typeorm/Repositories/ProfilePhoto/ProfilePhotoRepositoryInterface';
 import RequestImageInterface from './Interfaces/RequestImageInterface';
@@ -33,7 +33,7 @@ export default class PhotoUserService {
 
     const path = photo.path.split('files/');
 
-    const userPhotoFilePath = join(Multer.directory, path[1]);
+    const userPhotoFilePath = join(profilePhotoMulterConfig.directory, path[1]);
 
     const userPhotoFileExists = await fs.promises.stat(userPhotoFilePath);
 
@@ -49,7 +49,7 @@ export default class PhotoUserService {
     return {
       success: true,
       message: 'Foto de perfil alterada com sucesso',
-      path: photo.path,
+      path: `${process.env.APP_URL}/files/profile/${photo.path}`,
     };
   }
 }

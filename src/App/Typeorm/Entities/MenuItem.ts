@@ -37,7 +37,7 @@ export default class MenuItem {
   @UpdateDateColumn({ select: false })
   updated_at: Date;
 
-  @ManyToOne(() => MenuSection, section => section.item)
+  @ManyToOne(() => MenuSection, section => section.items)
   @JoinColumn({ name: 'menu_section_id' })
   section: MenuSection;
 

@@ -58,6 +58,8 @@ export default class SessionService {
 
     const { id } = userExist;
 
+    userExist.password = '';
+
     const refresh_token = await this.refreshTokenService.createRefreshToken(id);
 
     return {
@@ -69,6 +71,7 @@ export default class SessionService {
         }),
         refresh_token,
       },
+      user: userExist,
     };
   }
 }

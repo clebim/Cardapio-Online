@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   JoinColumn,
   OneToOne,
+  AfterLoad,
 } from 'typeorm';
 import MenuItem from './MenuItem';
 
@@ -32,4 +33,9 @@ export default class ItemPhoto {
   @OneToOne(() => MenuItem, item => item.photo)
   @JoinColumn({ name: 'menu_item_id' })
   item: MenuItem;
+
+  @AfterLoad()
+  setUrl(): void {
+    this.path = `${process.env.APP_URL}/files/item/${this.path}`;
+  }
 }

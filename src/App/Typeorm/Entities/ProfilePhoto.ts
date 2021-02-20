@@ -36,6 +36,6 @@ export default class ProfilePhoto {
 
   @AfterLoad()
   setUrl(): void {
-    this.path = `${process.env.APP_URL}/files/${this.path}`;
+    this.path = `${process.env.APP_URL}/files/profile/${this.path}`;
   }
 }

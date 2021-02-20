@@ -5,13 +5,18 @@ import SessionController from '../App/Http/Modules/Session/SessionController';
 import RefreshTokenController from '../App/Http/Modules/RefreshToken/RefreshTokenController';
 import PhotoUserController from '../App/Http/Modules/PhotoUserProfile/PhotoUserController';
 import SectionMenuController from '../App/Http/Modules/SectionMenu/SectionMenuController';
+import MenuItemController from '../App/Http/Modules/MenuItem/MenuItemController';
 
 import AuthMiddleware from '../App/Http/Middlewares/auth';
 import ForgotPasswordController from '../App/Http/Modules/ForgotPassword/ForgotPasswordController';
-import Multer from '../Config/Multer';
+import {
+  profilePhotoMulterConfig,
+  ItemPhotoMulterConfig,
+} from '../Config/Multer';
 
 const routes = Router();
-const upload = multer(Multer);
+const upload = multer(profilePhotoMulterConfig);
+const uploadItem = multer(ItemPhotoMulterConfig);
 
 // User Routes
 routes.post('/auth/register', UserController.create);
@@ -46,5 +51,13 @@ routes.post(
   SectionMenuController.changeIsActive,
 );
 routes.get('/menu_section/delete/:id', SectionMenuController.delete);
+
+routes.post(
+  '/items/store',
+  uploadItem.single('image'),
+  MenuItemController.store,
+);
+
+routes.get('/items/index', MenuItemController.index);
 
 export default routes;

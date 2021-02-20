@@ -1,14 +1,29 @@
 import { getConnection, Repository } from 'typeorm';
 import MenuSection from '../../Entities/MenuSection';
-import SectionMenuRepositoryInterface from './SectionMenuRepositoryInterface';
+import MenuSectionRepositoryInterface from './MenuSectionRepositoryInterface';
 import connection from '../../../../Config/ConnectionDataBaseConfig';
 
 export default class SectionMenuRepository
-  implements SectionMenuRepositoryInterface {
+  implements MenuSectionRepositoryInterface {
   private ormRepository: Repository<MenuSection>;
 
   constructor() {
     this.ormRepository = getConnection(connection).getRepository(MenuSection);
+  }
+
+  public async getUserItems(
+    userId: number,
+    isActive = true,
+  ): Promise<MenuSection[]> {
+    const userItems = this.ormRepository.find({
+      relations: ['items', 'items.photo'],
+      where: {
+        user_id: userId,
+        is_active: isActive,
+      },
+    });
+
+    return userItems;
   }
 
   public async createSection(

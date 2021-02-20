@@ -1,12 +1,16 @@
 import request from 'supertest';
 import { resolve as resolvePath } from 'path';
-import app from '../src/app';
+import app from '../../src/app';
 
 let access_token = '';
 
 describe('Profile Photo', () => {
   beforeEach(async () => {
     await new Promise<void>(resolve => setTimeout(() => resolve(), 100)); // avoid jest open handle error
+  });
+
+  beforeAll(async () => {
+    await new Promise<void>(resolve => setTimeout(() => resolve(), 100));
 
     const response = await request(app).post('/auth/login').send({
       email: 'crebimTeste@gmail.com',

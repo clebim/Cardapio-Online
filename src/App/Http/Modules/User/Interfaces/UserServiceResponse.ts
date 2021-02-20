@@ -1,10 +1,7 @@
-interface UserService {
-  id: number;
-  restaurante_name: string;
-}
+import User from '../../../../Typeorm/Entities/User';
 
 export default interface UserServiceResponse {
   success: boolean;
   message: string;
-  user: UserService | null;
+  user: User | null;
 }

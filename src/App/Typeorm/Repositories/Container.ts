@@ -5,8 +5,12 @@ import ForgotPasswordRepositoryInterface from './ForgotPassword/ForgotPasswordRe
 import ForgotPasswordRepository from './ForgotPassword/ForgotPasswordRepository';
 import ProfilePhotoRepositoryInterface from './ProfilePhoto/ProfilePhotoRepositoryInterface';
 import ProfilePhotoRepository from './ProfilePhoto/ProfilePhotoRepository';
-import SectionMenuRepositoryInterface from './SectionMenu/SectionMenuRepositoryInterface';
-import SectionMenuRepository from './SectionMenu/SectionMenuRepository';
+import MenuSectionRepositoryInterface from './MenuSection/MenuSectionRepositoryInterface';
+import MenuSectionRepository from './MenuSection/MenuSectionRepository';
+import MenuItemRepositoryInterface from './MenuItem/MenuItemRepositoryInterface';
+import MenuItemRepository from './MenuItem/MenuItemRepository';
+import ItemPhotoRepositoryInterface from './ItemPhoto/ItemPhotoRepositoryInterface';
+import ItemPhotoRepository from './ItemPhoto/ItemPhotoRepository';
 
 container.registerSingleton<UserRepositoryInterface>(
   'UserRepository',
@@ -23,7 +27,17 @@ container.registerSingleton<ProfilePhotoRepositoryInterface>(
   ProfilePhotoRepository,
 );
 
-container.registerSingleton<SectionMenuRepositoryInterface>(
-  'SectionMenuRepository',
-  SectionMenuRepository,
+container.registerSingleton<MenuSectionRepositoryInterface>(
+  'MenuSectionRepository',
+  MenuSectionRepository,
+);
+
+container.registerSingleton<MenuItemRepositoryInterface>(
+  'MenuItemRepository',
+  MenuItemRepository,
+);
+
+container.registerSingleton<ItemPhotoRepositoryInterface>(
+  'ItemPhotoRepository',
+  ItemPhotoRepository,
 );

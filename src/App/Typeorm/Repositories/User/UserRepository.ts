@@ -21,8 +21,8 @@ export default class UserRepository implements UserRepositoryInterface {
 
   public async findOneByEmail(email: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne({
+      relations: ['photo'],
       where: { email },
-      select: ['email', 'password', 'id', 'restaurant_name'],
     });
     return user;
   }

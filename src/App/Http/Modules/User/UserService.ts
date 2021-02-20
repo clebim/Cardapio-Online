@@ -55,13 +55,12 @@ export default class UserService {
 
     const newUser = await this.userRepository.createUser(data);
 
+    newUser.password = '';
+
     return {
       success: true,
       message: 'Usuário criado com sucesso',
-      user: {
-        id: newUser.id,
-        restaurante_name: newUser.restaurant_name,
-      },
+      user: newUser,
     };
   }
 }

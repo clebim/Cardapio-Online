@@ -1,12 +1,12 @@
 import { injectable, inject } from 'tsyringe';
 import SectionResponseInterface from './Interfaces/SectionResponseInterface';
 import SectionDataInterface from './Interfaces/SectionDataInterface';
-import SectionMenuRepositoryInterface from '../../../Typeorm/Repositories/SectionMenu/SectionMenuRepositoryInterface';
+import SectionMenuRepositoryInterface from '../../../Typeorm/Repositories/MenuSection/MenuSectionRepositoryInterface';
 
 @injectable()
 export default class SectionMenuService {
   constructor(
-    @inject('SectionMenuRepository')
+    @inject('MenuSectionRepository')
     private ormRepository: SectionMenuRepositoryInterface,
   ) {}
 

@@ -1,6 +1,6 @@
 node_modules
-Uploads/*
-!Uploads/.gitkeep
+uploads/*
+!uploads/.gitkeep
 .env
 tests/db_tests.sqlite
 ormconfig.json
