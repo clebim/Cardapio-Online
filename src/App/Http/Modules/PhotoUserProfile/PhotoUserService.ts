@@ -31,7 +31,7 @@ export default class PhotoUserService {
       };
     }
 
-    const path = photo.path.split('files/');
+    const path = photo.path.split('profile/');
 
     const userPhotoFilePath = join(profilePhotoMulterConfig.directory, path[1]);
 

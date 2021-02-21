@@ -1,9 +1,14 @@
 import { inject, injectable } from 'tsyringe';
+import { join } from 'path';
+import fs from 'fs';
+import MenuItem from '../../../Typeorm/Entities/MenuItem';
 import ItemDataInterface from '../../../Typeorm/Repositories/Interfaces/ItemDataInterface';
 import MenuItemRepository from '../../../Typeorm/Repositories/MenuItem/MenuItemRepository';
+import { ItemPhotoMulterConfig } from '../../../../Config/Multer';
 import MenuSectionRepositoryInterface from '../../../Typeorm/Repositories/MenuSection/MenuSectionRepositoryInterface';
 import MenuItemServiceResponseInterface from './Interfaces/MenuItemServiceResponseInterface';
 import { CreateMenuItemValidator } from '../../Validators/MenuItem/CreateMenuItemValidator';
+import { UpdateMenuItemValidator } from '../../Validators/MenuItem/UpdateMenuItemValidator';
 import ItemPhotoRepositoryInterface from '../../../Typeorm/Repositories/ItemPhoto/ItemPhotoRepositoryInterface';
 import PhotoInterface from './Interfaces/PhotoInterface';
 
@@ -86,9 +91,74 @@ export default class MenuItemService {
     };
   }
 
-  // public async executeUpdateItem(): Promise<MenuItemServiceResponseInterface> {}
+  public async executeUpdateItem(
+    id: number,
+    data: ItemDataInterface,
+  ): Promise<MenuItemServiceResponseInterface> {
+    if (
+      !UpdateMenuItemValidator.isValidSync(data, {
+        abortEarly: true,
+      })
+    ) {
+      const errorMessage: string = await UpdateMenuItemValidator.validate(
+        data,
+        {
+          abortEarly: true,
+        },
+      ).catch(error => {
+        return error.errors[0];
+      });
 
-  // public async executeUpdatePhotoItem(): Promise<MenuItemServiceResponseInterface> {}
+      return {
+        success: false,
+        message: errorMessage,
+        item: null,
+      };
+    }
 
-  // public async executeDeleteItem(): Promise<MenuItemServiceResponseInterface> {}
+    const item = (await this.menuItemRepository.findItemById(id)) as MenuItem;
+
+    item.menu_section_id = data.menu_section_id;
+    item.item_name = data.item_name;
+    item.description = data.description;
+    item.price = data.price;
+    item.sold_off = data.sold_off as boolean;
+    if (data.observation != null) {
+      item.observation = data.observation;
+    }
+
+    await this.menuItemRepository.updateItem(item);
+
+    return {
+      success: true,
+      message: 'Alterações realizadas com sucesso',
+      item,
+    };
+  }
+
+  public async executeDeleteItem(
+    itemId: number,
+  ): Promise<MenuItemServiceResponseInterface> {
+    const item = (await this.menuItemRepository.findItemById(
+      itemId,
+    )) as MenuItem;
+
+    const path = item.photo.path.split('item/');
+
+    const itemPhotoFilePath = join(ItemPhotoMulterConfig.directory, path[1]);
+
+    const userPhotoFileExists = await fs.promises.stat(itemPhotoFilePath);
+
+    if (userPhotoFileExists) {
+      await fs.promises.unlink(itemPhotoFilePath);
+    }
+
+    await this.menuItemRepository.deleteItem(itemId);
+
+    return {
+      success: true,
+      message: 'Item deletado com sucesso',
+      item: null,
+    };
+  }
 }

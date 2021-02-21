@@ -26,16 +26,11 @@ export default {
     const sectionMenuService = container.resolve<SectionMenuService>(
       SectionMenuService,
     );
-
-    const { userId } = request;
     const { id } = request.params;
-    const { is_active } = request.body;
 
-    const responseService = await sectionMenuService.executeChangeActive({
-      id: parseInt(id),
-      userId,
-      isActive: is_active,
-    });
+    const responseService = await sectionMenuService.executeChangeActive(
+      parseInt(id),
+    );
 
     if (responseService.success === false) {
       return response.status(400).json(responseService);

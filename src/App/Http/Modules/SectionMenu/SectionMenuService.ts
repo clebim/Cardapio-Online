@@ -2,6 +2,7 @@ import { injectable, inject } from 'tsyringe';
 import SectionResponseInterface from './Interfaces/SectionResponseInterface';
 import SectionDataInterface from './Interfaces/SectionDataInterface';
 import SectionMenuRepositoryInterface from '../../../Typeorm/Repositories/MenuSection/MenuSectionRepositoryInterface';
+import MenuSection from '../../../Typeorm/Entities/MenuSection';
 
 @injectable()
 export default class SectionMenuService {
@@ -27,27 +28,13 @@ export default class SectionMenuService {
   }
 
   public async executeChangeActive(
-    data: SectionDataInterface,
+    sectionId: number,
   ): Promise<SectionResponseInterface> {
-    const section = await this.ormRepository.getSectionById(data.id);
+    const section = (await this.ormRepository.getSectionById(
+      sectionId,
+    )) as MenuSection;
 
-    if (!section) {
-      return {
-        success: false,
-        message: 'Seção não encontrada',
-        section: null,
-      };
-    }
-
-    if (section.user_id != data.userId) {
-      return {
-        success: false,
-        message: 'Seção não pertence ao usuário',
-        section: null,
-      };
-    }
-
-    section.is_active = data.isActive as boolean;
+    section.is_active = !section.is_active;
 
     await this.ormRepository.setIsActive(section);
 
@@ -61,23 +48,9 @@ export default class SectionMenuService {
   public async executeDeleteSection(
     data: SectionDataInterface,
   ): Promise<SectionResponseInterface> {
-    const section = await this.ormRepository.getSectionById(data.id);
-
-    if (!section) {
-      return {
-        success: false,
-        message: 'Seção não encontrada',
-        section: null,
-      };
-    }
-
-    if (section.user_id != data.userId) {
-      return {
-        success: false,
-        message: 'Seção não pertence ao usuário',
-        section: null,
-      };
-    }
+    const section = (await this.ormRepository.getSectionById(
+      data.id,
+    )) as MenuSection;
 
     await this.ormRepository.deleteSection(section.id);
 

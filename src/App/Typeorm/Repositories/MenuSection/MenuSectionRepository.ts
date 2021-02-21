@@ -11,6 +11,17 @@ export default class SectionMenuRepository
     this.ormRepository = getConnection(connection).getRepository(MenuSection);
   }
 
+  public async getAllUserItems(userId: number): Promise<MenuSection[]> {
+    const userItems = this.ormRepository.find({
+      relations: ['items', 'items.photo'],
+      where: {
+        user_id: userId,
+      },
+    });
+
+    return userItems;
+  }
+
   public async getUserItems(
     userId: number,
     isActive = true,

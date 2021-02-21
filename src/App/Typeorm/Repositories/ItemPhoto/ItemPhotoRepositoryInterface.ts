@@ -4,5 +4,5 @@ import ItemPhoto from '../../Entities/ItemPhoto';
 export default interface ItemPhotoRepositoryInterface {
   createPhoto(data: MenuPhotoInterface): Promise<ItemPhoto>;
   updatePhoto(itemPhoto: ItemPhoto): Promise<ItemPhoto>;
-  findPhotoByUserId(menuItemId: number): Promise<ItemPhoto | undefined>;
+  findPhotoByItemId(menuItemId: number): Promise<ItemPhoto | undefined>;
 }

@@ -31,6 +31,9 @@ export default class MenuItem {
   @Column('varchar')
   observation: string;
 
+  @Column('boolean')
+  sold_off: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 

@@ -18,7 +18,7 @@ export default class ItemPhotoRepository
     return itemPhoto;
   }
 
-  public async findPhotoByUserId(
+  public async findPhotoByItemId(
     menuItemId: number,
   ): Promise<ItemPhoto | undefined> {
     const photo = await this.ormRepository.findOne({
