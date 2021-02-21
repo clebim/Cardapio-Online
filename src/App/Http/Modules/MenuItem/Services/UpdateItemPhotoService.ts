@@ -1,20 +1,20 @@
 import { inject, injectable } from 'tsyringe';
 import { join } from 'path';
 import fs from 'fs';
-import ItemPhotoRepositoryInterface from '../../../Typeorm/Repositories/ItemPhoto/ItemPhotoRepositoryInterface';
-import ItemPhoto from '../../../Typeorm/Entities/ItemPhoto';
-import { ItemPhotoMulterConfig } from '../../../../Config/Multer';
-import CreatePhotoResponse from '../PhotoUserProfile/Interfaces/CreatePhotoResponse';
-import EditPhotoItemInterface from './Interfaces/EditPhotoItemInterface';
+import ItemPhotoRepositoryInterface from '../../../../Typeorm/Repositories/ItemPhoto/ItemPhotoRepositoryInterface';
+import ItemPhoto from '../../../../Typeorm/Entities/ItemPhoto';
+import { ItemPhotoMulterConfig } from '../../../../../Config/Multer';
+import CreatePhotoResponse from '../../User/Interfaces/CreatePhotoResponse';
+import EditPhotoItemInterface from '../Interfaces/EditPhotoItemInterface';
 
 @injectable()
-export default class ItemPhotoService {
+export default class UpdateItemPhotoService {
   constructor(
     @inject('ItemPhotoRepository')
     private itemPhotoRepository: ItemPhotoRepositoryInterface,
   ) {}
 
-  public async executeUpdatePhotoItem(
+  public async execute(
     data: EditPhotoItemInterface,
   ): Promise<CreatePhotoResponse> {
     const itemPhoto = (await this.itemPhotoRepository.findPhotoByItemId(

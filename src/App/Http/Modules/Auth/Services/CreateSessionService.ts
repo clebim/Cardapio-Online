@@ -1,15 +1,15 @@
 import { injectable, inject } from 'tsyringe';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import authConfig from '../../../../Config/AuthConfig';
-import { sessionSchemaValidator } from '../../Validators/Session/CreateSessionValidator';
-import SessionDataInterface from './Interfaces/SessionDataInterface';
-import SessionServiceResponseInterface from './Interfaces/SessionServiceResponseInterface';
-import RefreshTokenService from '../../../../Shared/Services/RefreshToken/RefreshTokenService';
-import UserRepositoryInterface from '../../../Typeorm/Repositories/User/UserRepositoryInterface';
+import authConfig from '../../../../../Config/AuthConfig';
+import { sessionSchemaValidator } from '../../../Validators/Session/CreateSessionValidator';
+import SessionDataInterface from '../Interfaces/SessionDataInterface';
+import SessionServiceResponseInterface from '../Interfaces/SessionServiceResponseInterface';
+import RefreshTokenService from '../../../../../Shared/Services/RefreshToken/RefreshTokenService';
+import UserRepositoryInterface from '../../../../Typeorm/Repositories/User/UserRepositoryInterface';
 
 @injectable()
-export default class SessionService {
+export default class CreateSessionService {
   constructor(
     @inject('UserRepository')
     private userRepository: UserRepositoryInterface,
@@ -17,7 +17,7 @@ export default class SessionService {
     private refreshTokenService: RefreshTokenService,
   ) {}
 
-  async executeLogin(
+  public async execute(
     data: SessionDataInterface,
   ): Promise<SessionServiceResponseInterface> {
     if (!sessionSchemaValidator.isValidSync(data, { abortEarly: true })) {

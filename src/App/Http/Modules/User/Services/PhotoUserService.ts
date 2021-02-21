@@ -1,10 +1,10 @@
 import { injectable, inject } from 'tsyringe';
 import { join } from 'path';
 import fs from 'fs';
-import { profilePhotoMulterConfig } from '../../../../Config/Multer';
-import CreatePhotoResponse from './Interfaces/CreatePhotoResponse';
-import ProfilePhotoRepositoryInterface from '../../../Typeorm/Repositories/ProfilePhoto/ProfilePhotoRepositoryInterface';
-import RequestImageInterface from './Interfaces/RequestImageInterface';
+import { profilePhotoMulterConfig } from '../../../../../Config/Multer';
+import CreatePhotoResponse from '../Interfaces/CreatePhotoResponse';
+import ProfilePhotoRepositoryInterface from '../../../../Typeorm/Repositories/ProfilePhoto/ProfilePhotoRepositoryInterface';
+import RequestImageInterface from '../Interfaces/RequestImageInterface';
 
 @injectable()
 export default class PhotoUserService {
@@ -13,7 +13,7 @@ export default class PhotoUserService {
     private ormRepository: ProfilePhotoRepositoryInterface,
   ) {}
 
-  public async executeCreateProfilePhoto(
+  public async execute(
     data: RequestImageInterface,
   ): Promise<CreatePhotoResponse> {
     const photo = await this.ormRepository.findPhotoByUserId(data.userId);

@@ -1,17 +1,17 @@
 import { inject, injectable } from 'tsyringe';
-import UserServiceResponse from './Interfaces/UserServiceResponse';
-import { userSchemaValidator } from '../../Validators/User/CreateUserValidator';
-import UserData from '../../../Typeorm/Repositories/Interfaces/UserDataInterface';
-import UserRepositoryInterface from '../../../Typeorm/Repositories/User/UserRepositoryInterface';
+import UserServiceResponse from '../Interfaces/UserServiceResponse';
+import { userSchemaValidator } from '../../../Validators/User/CreateUserValidator';
+import UserData from '../../../../Typeorm/Repositories/Interfaces/UserDataInterface';
+import UserRepositoryInterface from '../../../../Typeorm/Repositories/User/UserRepositoryInterface';
 
 @injectable()
-export default class UserService {
+export default class CreateUserService {
   constructor(
     @inject('UserRepository')
     private userRepository: UserRepositoryInterface,
   ) {}
 
-  public async executeCreateUser(data: UserData): Promise<UserServiceResponse> {
+  public async execute(data: UserData): Promise<UserServiceResponse> {
     // make the necessary validations;
     if (
       !userSchemaValidator.isValidSync(data, {
