@@ -66,21 +66,21 @@ export default class ResetPasswordService {
       };
     }
 
-    const response = await this.userRepository.resetPassword(
-      user as User,
-      data.password,
-    );
+    const revoged = await this.forgotPasswordRepository.revogedHash(data.hash);
 
-    if (!response) {
+    if (!revoged) {
       return {
         success: false,
         message: 'Falha desconhecida ao alterar senha',
       };
     }
 
-    const revoged = await this.forgotPasswordRepository.revogedHash(data.hash);
+    const response = await this.userRepository.resetPassword(
+      user as User,
+      data.password,
+    );
 
-    if (!revoged) {
+    if (!response) {
       return {
         success: false,
         message: 'Falha desconhecida ao alterar senha',

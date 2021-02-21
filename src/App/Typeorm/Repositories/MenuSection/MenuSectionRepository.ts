@@ -17,6 +17,9 @@ export default class SectionMenuRepository
       where: {
         user_id: userId,
       },
+      order: {
+        section_name: 'ASC',
+      },
     });
 
     return userItems;
@@ -31,6 +34,9 @@ export default class SectionMenuRepository
       where: {
         user_id: userId,
         is_active: isActive,
+      },
+      order: {
+        section_name: 'ASC',
       },
     });
 

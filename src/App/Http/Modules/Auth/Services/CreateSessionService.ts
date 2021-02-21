@@ -38,7 +38,7 @@ export default class CreateSessionService {
 
     const { email, password } = data;
 
-    const userExist = await this.userRepository.findOneByEmail(email);
+    const userExist = await this.userRepository.getUserWithPassword(email);
 
     if (!userExist) {
       return {
@@ -57,8 +57,6 @@ export default class CreateSessionService {
     }
 
     const { id } = userExist;
-
-    userExist.password = '';
 
     const refresh_token = await this.refreshTokenService.createRefreshToken(id);
 

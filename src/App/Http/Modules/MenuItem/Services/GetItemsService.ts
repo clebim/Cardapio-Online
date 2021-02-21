@@ -3,7 +3,7 @@ import MenuSectionRepositoryInterface from '../../../../Typeorm/Repositories/Men
 import MenuItemServiceResponseInterface from '../Interfaces/MenuItemServiceResponseInterface';
 
 @injectable()
-export default class GetAllItemsSercice {
+export default class GetUserItems {
   constructor(
     @inject('MenuSectionRepository')
     private menuSectionRepository: MenuSectionRepositoryInterface,
@@ -12,7 +12,7 @@ export default class GetAllItemsSercice {
   public async execute(
     userId: number,
   ): Promise<MenuItemServiceResponseInterface> {
-    if (userId === null) {
+    if (userId == null) {
       return {
         success: false,
         message: 'Id do usuáio não enviado',
@@ -20,7 +20,10 @@ export default class GetAllItemsSercice {
       };
     }
 
-    const userItems = await this.menuSectionRepository.getAllUserItems(userId);
+    const userItems = await this.menuSectionRepository.getUserItems(
+      userId,
+      true,
+    );
 
     return {
       success: true,

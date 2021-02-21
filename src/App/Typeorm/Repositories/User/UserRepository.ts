@@ -12,7 +12,26 @@ export default class UserRepository implements UserRepositoryInterface {
     this.ormRepository = getConnection(connection).getRepository(User);
   }
 
-  async findOneById(id: number): Promise<User> {
+  public async getUserWithPassword(email: string): Promise<User | undefined> {
+    const user = await this.ormRepository.findOne({
+      relations: ['photo'],
+      where: { email },
+      select: ['id', 'password', 'email'],
+    });
+    return user;
+  }
+
+  public async getUsersByName(name: string): Promise<User[]> {
+    const users = await this.ormRepository
+      .createQueryBuilder('users')
+      .leftJoinAndSelect('users.photo', 'photo')
+      .where('users.restaurant_name ILIKe :name', { name: `%${name}%` })
+      .getMany();
+
+    return users;
+  }
+
+  public async findOneById(id: number): Promise<User> {
     const user = await this.ormRepository.findOne({
       where: { id },
     });
@@ -45,7 +64,7 @@ export default class UserRepository implements UserRepositoryInterface {
     return user;
   }
 
-  async resetPassword(user: User, password: string): Promise<boolean> {
+  public async resetPassword(user: User, password: string): Promise<boolean> {
     try {
       user.password = password;
 

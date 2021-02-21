@@ -9,6 +9,8 @@ import AuthMiddleware from '../../Middlewares/auth';
 const upload = multer(ItemPhotoMulterConfig);
 const routes = Router();
 
+routes.get('/user/items/:id', MenuItemController.getUserItems);
+
 routes.use(AuthMiddleware);
 
 routes.post('/items/store', upload.single('image'), MenuItemController.store);

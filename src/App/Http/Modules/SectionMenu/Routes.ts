@@ -5,18 +5,18 @@ import AuthMiddleware from '../../Middlewares/auth';
 
 const routes = Router();
 
-routes.use(AuthMiddleware);
-
-routes.post('/menu_section/store', SectionMenuController.store);
+routes.post('/menu_section/store', AuthMiddleware, SectionMenuController.store);
 
 routes.put(
   '/menu_section/set_active/:id',
+  AuthMiddleware,
   VerifySectionOwner,
   SectionMenuController.changeIsActive,
 );
 
 routes.delete(
   '/menu_section/delete/:id',
+  AuthMiddleware,
   VerifySectionOwner,
   SectionMenuController.delete,
 );

@@ -27,7 +27,7 @@ export default class PhotoUserService {
       return {
         success: true,
         message: 'Imagem cadastrada com sucesso',
-        path: newPhoto.path,
+        path: `${process.env.APP_URL}/files/profile/${newPhoto.path}`,
       };
     }
 

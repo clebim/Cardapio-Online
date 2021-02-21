@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import CreateItemService from './Services/CreateItemService';
 import DeleteItemService from './Services/DeleteItemService';
 import GetAllItemsSercice from './Services/GetAllItemsService';
+import GetUserItems from './Services/GetItemsService';
 import ItemPhotoService from './Services/UpdateItemPhotoService';
 import UpdateItemService from './Services/UpdateItemService';
 
@@ -49,6 +50,20 @@ export default {
     );
 
     const responseService = await getAllItemsService.execute(request.userId);
+
+    if (responseService.success === false) {
+      return response.status(400).json(responseService);
+    }
+
+    return response.status(200).json(responseService);
+  },
+
+  async getUserItems(request: Request, response: Response): Promise<Response> {
+    const getUserItems = container.resolve<GetUserItems>(GetUserItems);
+
+    const { id } = request.params;
+
+    const responseService = await getUserItems.execute(parseInt(id));
 
     if (responseService.success === false) {
       return response.status(400).json(responseService);

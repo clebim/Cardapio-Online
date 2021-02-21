@@ -14,7 +14,7 @@ export default async function (
 
   const sectionAndItem = await reposiroty
     .createQueryBuilder('menu_sections')
-    .innerJoinAndSelect('menu_sections.items', 'item')
+    .leftJoinAndSelect('menu_sections.items', 'item')
     .where('item.id = :id', { id: item_id })
     .select(['menu_sections.id', 'menu_sections.user_id', 'item.id'])
     .getOne();
