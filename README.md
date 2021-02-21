@@ -4,10 +4,8 @@
 
 <p align="center">
   <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-getting-started">Getting started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-getting-started">Getting started</a>&nbsp;&nbsp;&nbsp;
 </p>
-
-# application in development
 
 ## About the project
 
@@ -82,13 +80,3 @@ $ yarn dev:server
 
 # Well done, project is started!
 ```
-
-## finished so far
- - login
- - register
- - middleware auth JWT
- - refresh token JWT
- - forgot/reset password
- - sending emails
- - background jobs
- - SectionMenu cruds
