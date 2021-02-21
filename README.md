@@ -37,6 +37,7 @@ Technologies that I used to develop this api
 - [Node.js](https://nodejs.org/en/)
 - [Yarn](https://classic.yarnpkg.com/) or [npm](https://www.npmjs.com/)
 - Instances of [PostgreSQL](https://www.postgresql.org/) or any other SQL database
+- Instance of Redis
 
 ## 💻 Getting started
 
